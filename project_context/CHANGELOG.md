@@ -122,3 +122,22 @@
 - Interactions: parallax, magnetic buttons, CSS tooltips, sliding mode ink, compare handle with SOURCE/FLOOD tags, mask reveal on inference, deck IDLE/PROCESSING/COMPLETE, 18-point checklist all covered, reduced-motion + reduced-transparency fallbacks.
 - Validated live with zero console errors: Mekong 18.2236 / Ghana 0.0097; all IDs present; node --check PASS; 5 Playwright screenshots reviewed (website/tsao_{hero,analyze,compare}.png); backend + inference + locked files untouched.
 - D22 recorded. Server left running for review. NEXT STEP = FINAL PROJECT POLISH / REVIEW PREPARATION.
+
+## 2026-10-08 13:00 UTC - T-SAO_PREMIUM_REFINEMENT COMPLETE
+- Background swapped to images/img2.jpg (satellite estuary): optimized to website/frontend/bg2.jpg (8375px/11.7MB to 1920px/736KB), retuned scrims so terrain/water texture breathes while text stays readable; preload updated.
+- Full name wired in: hero hairline (Terrain-Sensitive Assessment of Overflow), method line, rebuilt footer (brand + full name + model/data/mode meta + locked base strip), title tag, wordmark tooltip.
+- Navbar premium: entrance slide-fade, sliding gradient underlines (hover .7 / active full + glow), wordmark icon glow + tracking shift, pressed states, stronger scrolled blur/glow, links kept visible on mobile (dot-only status under 560px).
+- UX: plain-language flood verdict from live fraction (No/Minimal/Localized/Significant/Major + % of valid scene), "Open compare" next-action shortcut, standby empty state with reticle (skill: helpful empty states), staggered scene-card entrances, deck top sheen, gradient primary buttons with inset highlight.
+- Skill queries run (navbar active-state, empty-state guidance) and applied; no backend/model/inference changes; no fake data (verdict derives from live flood_fraction).
+- Validated: Mekong 18.2236 / Ghana 0.0097, zero console errors, bg2 + all IDs + full-name probes PASS, evidence settles to 0.6699/0.8023/0.6311, reduced-motion reveals all visible, desktop/tablet/mobile screenshots reviewed (website/tsao2_*.png). D23 recorded.
+
+## 2026-10-08 13:40 UTC - FINAL_REPOSITORY_AUDIT COMPLETE (submission-readiness pass)
+- Verified production artifacts: final_model_config (test 0.6699/0.8023/0.8185/0.7868, Bolivia 0.6311/0.7739/0.8899/0.6846, thr 0.5, seed 42, 3ch) consistent with nb06 ablation + nb07 + nb09 + nb10 files; checkpoint param assert (7763041) passes at load; no contradictions.
+- Inference smoke (direct FloodPredictor): Mekong 18.2236 (IoU 0.9102), Ghana 0.0097 — exact locked reproduction. Pipeline asserts (threshold/stats/channels/finite/mask) intact.
+- Website E2E (Playwright, zero console errors): Mekong analysis settles 18.22 + Major verdict, Ghana 0.01 + Minimal verdict, compare line works, flood mask renders real trace-flood darkness for Ghana, nav works, brand line renders.
+- Secrets scan (src/website/notebooks): clean — only benign prose matches.
+- Git: .gitignore extended (website/.cache, .kilo, images/img2.jpg source, website/*.png shots); experimental ~560MB checkpoints correctly excluded; tracked tree ~41MB (31MB M1 + research).
+- Removed dead tracked assets: website/frontend/bg.jpg, website/tsao_*.png (superseded), images/img1.jpg (unreferenced) — all unreferenced in code.
+- Rewrote README.md into 19-section research README with locked values only, honest limitations, no invented citations/claims.
+- NB01–NB11 present, no backups/checkpoints; results figures present; absolute local paths exist only inside historical results JSON metadata (not code).
+- D24 recorded. NOT committed — awaiting manual git commit/push by user.

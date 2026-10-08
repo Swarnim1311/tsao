@@ -1,7 +1,15 @@
 .opencode/
+.kilo/
 
 processed/
 predictions/
+website/.cache/
+
+# Local high-res design source (derived website/frontend/bg2.jpg is committed)
+images/img2.jpg
+
+# Review screenshots (regenerable, not part of the product)
+website/*.png
 
 # Experimental model checkpoints
 models/nb04_s1_unet_best.pt

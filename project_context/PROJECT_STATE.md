@@ -1,6 +1,6 @@
 # TSAO Flood-Mapping - Project State
 
-**Last updated:** 2026-10-08 12:10 UTC (T-SAO COMMAND REDESIGN complete: yes)
+**Last updated:** 2026-10-08 13:00 UTC (T-SAO PREMIUM REFINEMENT complete: yes)
 
 ## Objective
 Deep-learning flood mapping from multimodal remote sensing: Sentinel-1 SAR (VV/VH) + Copernicus DEM elevation + NASA IMERG antecedent rainfall → binary flood mask. Sentinel-1 chip is the canonical target grid (512×512, EPSG:4326).
@@ -63,6 +63,13 @@ Deep-learning flood mapping from multimodal remote sensing: Sentinel-1 SAR (VV/V
 - Area: latitude-corrected WGS84 per-pixel areas (~97-98 m2/px); e.g. Mekong_1443339 GT 18.7210 vs pred 18.2236 km2 (rel err 2.66%, descriptive).
 - Outputs: predictions/{probabilities,masks}/ GeoTIFFs (EPSG:4326), results/final_inference_examples/ panels, CLI `python -m src.inference`, NB11 demo notebook executed clean. 22/22 quality gates PASS.
 
+
+## T-SAO PREMIUM REFINEMENT result (2026-10-08 13:00 UTC)
+- img2 estuary environment (bg2.jpg), full T-SAO name in hero/method/footer/title, premium navbar (entrance, sliding underlines, mobile links), flood verdict + compare shortcut + standby empty state + stagger + sheen, rebuilt footer.
+- Validated live, zero console errors: Mekong 18.2236 / Ghana 0.0097; evidence 0.6699/0.8023/0.6311; reduced-motion + tablet + mobile verified; shots website/tsao2_*.png. Backend/inference/locked files untouched.
+
+## D24 - FINAL REPOSITORY AUDIT COMPLETE (2026-10-08 14:15 UTC)
+- Verified repo structure for GitHub submission-readiness: .gitignore covers .kilo/, website/.cache/, generated artifacts; tracked tree ~41MB with M1 + configs + NB01–NB11 + results + site. README documents architecture, locked metrics, and startup. No secrets, no experimental checkpoints. Final audit report generated. GitHub commit/push pending user action.
 
 ## T-SAO COMMAND REDESIGN result (2026-10-08 12:10 UTC, supersedes 11:30 editorial direction)
 - Flood-intelligence command aesthetic: floating pill nav, wave-environment hero (bg.jpg) with live-status glass panel + HUD strip, glass SCENE/MAP/DATA workstation, hover pipeline, animated-bars evidence. Space Grotesk + Inter + JetBrains Mono; aqua/lime/amber semantic palette.

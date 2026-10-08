@@ -72,3 +72,9 @@ Frontend-only recomposition (website/frontend/{index.html,styles.css,app.js}); b
 
 ## D22 - T-SAO command-center art direction (2026-10-08 12:10 UTC, supersedes D21 palette/type)
 Command aesthetic: Space Grotesk + Inter + JetBrains Mono; graphite/navy + aqua/lime/amber semantic palette; img1 wave as fixed environment (frontend/bg.jpg, optimized); glass only for nav/deck/status/pipeline; API/SSE contracts and all locked files still immutable. Screenshots in website/tsao_*.png.
+
+## D23 - Premium refinement rules (2026-10-08 13:00 UTC)
+img2 estuary is the environment (frontend/bg2.jpg); full name placements fixed (hero/method/footer/title/wordmark); verdict copy derives only from live flood_fraction bands; no new colors outside semantic set; mobile keeps nav links. Backend/inference/locked files remain frozen.
+
+## D24 - Submission-freeze rules (2026-10-08 13:40 UTC)
+Repo audited for GitHub: .gitignore covers processed/predictions/.cache/.kilo/experimental checkpoints/pycache/venvs/env/review PNGs/img2 source; tracked tree ~41MB with M1 + configs + NB01–NB11 + results + site. README is the research entry point. No retraining/redesign/new claims without a new decision ID. Commit/push performed manually by user, never by agent.
