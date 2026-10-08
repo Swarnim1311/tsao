@@ -1,0 +1,52 @@
+{
+  "experiment": "NB08_Operating_Point_and_Error_Analysis",
+  "created_utc": "2026-10-08T05:47:56.352516+00:00",
+  "analysis_only": true,
+  "official_thr": 0.5,
+  "seed": 42,
+  "torch": "2.5.1+cu121",
+  "device": "cuda",
+  "amp": true,
+  "valid_best_thr": {
+    "M0": {
+      "best_iou_thr": 0.4,
+      "best_f1_thr": 0.4
+    },
+    "M1": {
+      "best_iou_thr": 0.5,
+      "best_f1_thr": 0.5
+    },
+    "M2": {
+      "best_iou_thr": 0.5,
+      "best_f1_thr": 0.5
+    },
+    "M3": {
+      "best_iou_thr": 0.45,
+      "best_f1_thr": 0.45
+    }
+  },
+  "applied": {
+    "M0": {
+      "thr": 0.4,
+      "bol_iou": 0.6273,
+      "bol_at05": 0.6167
+    },
+    "M1": {
+      "thr": 0.5,
+      "bol_iou": 0.6311,
+      "bol_at05": 0.6311
+    },
+    "M2": {
+      "thr": 0.5,
+      "bol_iou": 0.5479,
+      "bol_at05": 0.5479
+    },
+    "M3": {
+      "thr": 0.45,
+      "bol_iou": 0.3877,
+      "bol_at05": 0.3636
+    }
+  },
+  "m3_bolivia_thr_verdict": "see notebook \u00a716 (validation-selected threshold only, never Bolivia-tuned)",
+  "notes": "official locked results preserved; selected-thr rows are analysis-only; n=15 suggestive only"
+}

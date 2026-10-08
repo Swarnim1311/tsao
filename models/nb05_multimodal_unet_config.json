@@ -1,0 +1,43 @@
+{
+  "model": "UNet",
+  "in_channels": 6,
+  "channels": [
+    "VV_dB",
+    "VH_dB",
+    "DEM_m",
+    "rain_t-3",
+    "rain_t-2",
+    "rain_t-1"
+  ],
+  "base_channels": 32,
+  "params": 7763905,
+  "arch": "6-32-64-128-256-[512]-256-128-64-32-1 (NB04 family, first conv only differs)",
+  "normalization": "NB03 train-derived stats (unchanged file)",
+  "loss": "0.5*maskedBCE + 0.5*maskedDice",
+  "threshold": 0.5,
+  "optimizer": "AdamW",
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "scheduler": "ReduceLROnPlateau(min,val_loss,f=0.5,p=4)",
+  "batch_size": 4,
+  "epochs_run": 28,
+  "selection": "best validation IoU",
+  "best_epoch": 20,
+  "best_val": {
+    "loss": 0.2705206244849087,
+    "iou": 0.6288183691064451,
+    "f1": 0.7721160083023574,
+    "precision": 0.8415463576263994,
+    "recall": 0.7132689675449059,
+    "tp": 1591450.0,
+    "fp": 299652.0,
+    "fn": 639756.0,
+    "tn": 17743296.0
+  },
+  "seed": 42,
+  "amp": true,
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "torch": "2.5.1+cu121",
+  "created_utc": "2026-10-07T10:32:11.050165+00:00"
+}

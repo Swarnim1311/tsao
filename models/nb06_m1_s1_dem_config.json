@@ -1,0 +1,25 @@
+{
+  "model": "UNet",
+  "in_channels": 3,
+  "channels": [
+    "VV_dB",
+    "VH_dB",
+    "DEM_m"
+  ],
+  "params": 7763041,
+  "protocol": "NB04/NB05 identical (seed 42, AdamW 1e-3/1e-4, plateau, patience 8, batch 4, thr 0.5, AMP)",
+  "best_epoch": 26,
+  "best_val": {
+    "loss": 0.2551968988407864,
+    "iou": 0.638653479261249,
+    "f1": 0.779485702052863,
+    "precision": 0.7901947836049837,
+    "recall": 0.769063008973622,
+    "tp": 1715938.0,
+    "fp": 455600.0,
+    "fn": 515268.0,
+    "tn": 17587348.0
+  },
+  "seed": 42,
+  "created_utc": "2026-10-08T05:13:43.049138+00:00"
+}

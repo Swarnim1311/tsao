@@ -1,0 +1,57 @@
+{
+  "notebook": "NB05_Multimodal_UNet",
+  "created_utc": "2026-10-07T10:32:20.405514+00:00",
+  "input": [
+    "VV_dB",
+    "VH_dB",
+    "DEM_m",
+    "rain_t-3",
+    "rain_t-2",
+    "rain_t-1"
+  ],
+  "in_shape": [
+    6,
+    512,
+    512
+  ],
+  "model": "UNet-32 (NB04 family)",
+  "params": 7763905,
+  "loss": "0.5*maskedBCE+0.5*maskedDice",
+  "config": {
+    "seed": 42,
+    "batch": 4,
+    "lr": 0.001,
+    "wd": 0.0001,
+    "epochs_max": 40,
+    "patience": 8
+  },
+  "train_time_min": 13.9,
+  "epochs_run": 28,
+  "best_epoch": 20,
+  "best_val": {
+    "loss": 0.2705206244849087,
+    "iou": 0.6288183691064451,
+    "f1": 0.7721160083023574,
+    "precision": 0.8415463576263994,
+    "recall": 0.7132689675449059,
+    "tp": 1591450.0,
+    "fp": 299652.0,
+    "fn": 639756.0,
+    "tn": 17743296.0
+  },
+  "test": {
+    "loss": 0.2848068681028154,
+    "iou": 0.6638878913423665,
+    "f1": 0.7979959399731312,
+    "precision": 0.8899056717305774,
+    "recall": 0.7232939219278822,
+    "tp": 1819090.0,
+    "fp": 225048.0,
+    "fn": 695918.0,
+    "tn": 17703903.0
+  },
+  "threshold": 0.5,
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "amp": true
+}

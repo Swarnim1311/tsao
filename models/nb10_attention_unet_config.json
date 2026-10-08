@@ -1,0 +1,25 @@
+{
+  "model": "AttUNet-32",
+  "in_channels": 3,
+  "channels": [
+    "VV_dB",
+    "VH_dB",
+    "DEM_m"
+  ],
+  "params": 7893845,
+  "protocol": "NB06-M1 identical (seed 42, AdamW 1e-3/1e-4, plateau f=0.5/p=4, patience 8, batch 4, thr 0.5, AMP)",
+  "best_epoch": 19,
+  "best_val": {
+    "loss": 0.2680061707335911,
+    "iou": 0.6182138319842077,
+    "f1": 0.7640693947370714,
+    "precision": 0.7681242591516425,
+    "recall": 0.7600571170927289,
+    "tp": 1695844.0,
+    "fp": 511929.0,
+    "fn": 535362.0,
+    "tn": 17531019.0
+  },
+  "seed": 42,
+  "created_utc": "2026-10-08T08:24:23.329515+00:00"
+}

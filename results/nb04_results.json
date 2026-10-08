@@ -1,0 +1,46 @@
+{
+  "notebook": "NB04_S1_UNet_Baseline",
+  "created_utc": "2026-10-07T09:52:27.997050+00:00",
+  "input": "VV+VH only (2,512,512)",
+  "model": "UNet-32",
+  "params": 7762753,
+  "loss": "0.5*maskedBCE+0.5*maskedDice",
+  "config": {
+    "seed": 42,
+    "batch": 4,
+    "lr": 0.001,
+    "wd": 0.0001,
+    "epochs_max": 40,
+    "patience": 8
+  },
+  "train_time_min": 26.98,
+  "epochs_run": 32,
+  "best_epoch": 24,
+  "best_val": {
+    "loss": 0.2593175949675314,
+    "iou": 0.6324971753667415,
+    "f1": 0.7748830252248475,
+    "precision": 0.814862445469904,
+    "recall": 0.7386431373884793,
+    "tp": 1648065.0,
+    "fp": 374442.0,
+    "fn": 583141.0,
+    "tn": 17668506.0
+  },
+  "test": {
+    "loss": 0.257466051975886,
+    "iou": 0.6683904956275099,
+    "f1": 0.8012398739530441,
+    "precision": 0.8144290731906054,
+    "recall": 0.7884710505891032,
+    "tp": 1983011.0,
+    "fp": 451837.0,
+    "fn": 531997.0,
+    "tn": 17477114.0
+  },
+  "threshold": 0.5,
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "amp": true,
+  "interpretation": "S1-only baseline for NB05/NB06 comparison; no superiority claim over multimodal learning."
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T-SAO — Flood Intelligence Command</title>
+<meta name="description" content="T-SAO: pixel-level flood mapping from Sentinel-1 SAR and terrain intelligence. Live deep-learning inference, geospatial flood extent.">
+<link rel="preload" as="image" href="/bg.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070a10'/%3E%3Cpath d='M4 21c5-1.2 7-7 12-7s6 4.5 12 3.4V23H4z' fill='%233ee6c4'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#analyze">Skip to flood analysis</a>
+<div class="env" aria-hidden="true"><div class="env-img" id="envImg"></div><div class="env-shade"></div><div class="env-grid"></div><div class="env-scan"></div></div>
+
+<!-- ══ FLOATING NAV ══ -->
+<header class="nav" id="topNav">
+  <div class="nav-pill">
+    <a class="wordmark" href="#top" aria-label="T-SAO home">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0b1220"/><path d="M4 21c5-1.2 7-7 12-7s6 4.5 12 3.4V23H4z" fill="#3ee6c4"/></svg>
+      <span class="wm">T-SAO</span>
+    </a>
+    <nav aria-label="Primary" class="nav-links">
+      <a href="#overview" data-nav="overview">Overview</a>
+      <a href="#analyze" data-nav="analyze">Analyze</a>
+      <a href="#method" data-nav="method">Method</a>
+    </nav>
+    <span class="sys"><span class="dot" id="sysDot" aria-hidden="true"></span><span id="sysText">M1 · BOOT</span></span>
+  </div>
+</header>
+
+<main id="overview">
+  <!-- ══ HERO — intelligence environment ══ -->
+  <section class="hero" id="top" aria-labelledby="heroH">
+    <div class="wrap hero-grid">
+      <div class="hero-left">
+        <p class="eyebrow reveal"><span class="tick" aria-hidden="true"></span>T-SAO · Flood intelligence system · M1 locked</p>
+        <h1 id="heroH" class="hero-h">
+          <span class="reveal d1">T-SAO</span>
+          <span class="thin reveal d2">Flood Intelligence</span>
+        </h1>
+        <p class="hero-sub reveal d3">Pixel-level flood mapping from Sentinel-1 SAR and terrain.
+          Live model inference — every pixel on this page is computed, not illustrated.</p>
+        <div class="hero-cta reveal d4">
+          <a class="btn primary magnetic" href="#analyze" id="ctaAnalyze" data-tip="Jump to the live analysis workstation">Analyze scene</a>
+          <a class="btn ghost magnetic" href="#method">Method</a>
+        </div>
+        <dl class="hero-spec reveal d5">
+          <div data-tip="Locked production model"><dt>Model</dt><dd>M1 · U-Net-32</dd></div>
+          <div data-tip="SAR polarizations plus elevation"><dt>Input</dt><dd>VV · VH · DEM</dd></div>
+          <div data-tip="Locked Sen1Floods11 test score"><dt>Test IoU</dt><dd class="cyan">0.6699</dd></div>
+        </dl>
+      </div>
+
+      <aside class="status-card glass float-a reveal d3" aria-label="Live system status" data-depth="14">
+        <p class="card-tag"><span class="pulse" aria-hidden="true"></span>Live system</p>
+        <dl class="status-rows">
+          <div><dt>Model</dt><dd>M1 · U-Net-32</dd></div>
+          <div><dt>Input</dt><dd>VV / VH / DEM</dd></div>
+          <div><dt>Threshold</dt><dd>0.50</dd></div>
+          <div><dt>Test IoU</dt><dd class="cyan">0.6699</dd></div>
+          <div><dt>Bolivia IoU</dt><dd class="lime">0.6311</dd></div>
+          <div><dt>Status</dt><dd class="lime" id="heroStatus">● Ready</dd></div>
+        </dl>
+        <div class="mini-map" aria-hidden="true"><span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span><span class="reticle"></span></div>
+      </aside>
+    </div>
+
+    <div class="wrap hero-hud">
+      <span class="hud-item" id="hudScene">SCENE —</span>
+      <span class="hud-item hide-s" id="hudEvent">EVENT —</span>
+      <span class="hud-item hide-m" id="hudCoords">GRID 512×512 · EPSG:4326</span>
+      <span class="hud-item right">SAR + TERRAIN → FLOOD EXTENT</span>
+    </div>
+  </section>
+
+  <!-- ══ WORKSTATION ══ -->
+  <section id="analyze" class="station" aria-labelledby="analyzeH">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Analysis workstation</p>
+        <h2 id="analyzeH">Scene / Map / Data</h2>
+        <p class="sec-sub">Four fixed Sen1Floods11 test scenes. Select → analyze → inspect.
+          All imagery and numbers are produced live by M1.</p>
+      </div>
+
+      <div class="deck glass reveal">
+        <div class="deck-bar">
+          <span class="deck-title" id="deckTitle">SCENE · —</span>
+          <span class="deck-status" id="deckStatus"><span class="dot idle" aria-hidden="true"></span>IDLE</span>
+        </div>
+
+        <div class="deck-grid">
+          <!-- scenes -->
+          <div class="scene-col">
+            <div id="sceneList" class="scene-list" role="listbox" aria-label="Demo scenes" tabindex="0"></div>
+            <div class="scene-meta" id="sceneMeta" aria-live="polite"></div>
+            <button class="btn primary block magnetic" id="runBtn" type="button" data-tip="Run live M1 inference on this scene">Analyze scene</button>
+            <p class="run-state" id="runState" role="status" aria-live="polite">Select a scene, then run analysis.</p>
+            <ol class="stages" id="stageSteps" aria-label="Inference stages" hidden>
+              <li data-stage="preparing">Prep</li>
+              <li data-stage="normalizing">Norm</li>
+              <li data-stage="segmenting">Seg</li>
+              <li data-stage="extent">Area</li>
+            </ol>
+          </div>
+
+          <!-- viewport -->
+          <div class="map-col">
+            <div class="map-tools">
+              <div class="modes" role="tablist" aria-label="Visualization modes">
+                <span class="modes-ink" id="modesInk" aria-hidden="true"></span>
+                <button role="tab" data-mode="source" aria-selected="true" type="button" data-tip="SAR backscatter or terrain">Source</button>
+                <button role="tab" data-mode="prob" aria-selected="false" type="button" data-tip="Per-pixel flood probability">Probability</button>
+                <button role="tab" data-mode="mask" aria-selected="false" type="button" data-tip="Thresholded flood mask">Flood</button>
+                <button role="tab" data-mode="gt" aria-selected="false" type="button" data-tip="Hand-labeled ground truth">Truth</button>
+                <button role="tab" data-mode="compare" aria-selected="false" type="button" data-tip="Drag to compare">Compare</button>
+              </div>
+              <div class="src-sub" id="srcSub" role="group" aria-label="Source channel">
+                <button type="button" data-src="vv" class="on" aria-pressed="true" data-tip="VV polarization">VV</button>
+                <button type="button" data-src="vh" aria-pressed="false" data-tip="VH polarization">VH</button>
+                <button type="button" data-src="dem" aria-pressed="false" data-tip="Copernicus elevation">DEM</button>
+              </div>
+            </div>
+            <div class="viewport corners" id="viewport">
+              <div class="zoomable" id="zoomable">
+                <img id="viewMain" alt="Flood visualization canvas">
+                <img id="viewTop" alt="" class="cmp-top">
+                <div class="skeleton" id="skeleton" hidden aria-hidden="true"></div>
+              </div>
+              <div class="cmp-line" id="cmpLine" hidden aria-hidden="true">
+                <span class="cmp-tag left">SOURCE</span><span class="cmp-handle"></span><span class="cmp-tag right">FLOOD</span>
+              </div>
+              <input type="range" id="cmpSlider" class="cmp-slider" min="0" max="100" value="50"
+                     aria-label="Comparison slider: source versus prediction" hidden>
+              <div class="zoombar" role="group" aria-label="View controls">
+                <button type="button" id="zin" aria-label="Zoom in" data-tip="Zoom in">+</button>
+                <button type="button" id="zout" aria-label="Zoom out" data-tip="Zoom out">−</button>
+                <button type="button" id="zreset" data-tip="Reset view">Reset</button>
+              </div>
+              <p class="view-cap" id="viewCap">VV · Sentinel-1 backscatter</p>
+            </div>
+            <div class="legend" id="legend" aria-label="Legend"></div>
+          </div>
+
+          <!-- data -->
+          <aside class="data-col" aria-label="Results" aria-live="polite">
+            <p class="r-label">Flood extent</p>
+            <div class="result-empty" id="resultEmpty">
+              <p class="empty-big">Awaiting analysis</p>
+              <p class="muted">Run inference — the extent materializes here with a mask reveal.</p>
+            </div>
+            <div class="result-body" id="resultBody" hidden>
+              <p class="r-area"><span id="rArea">0.00</span><span class="unit">km²</span></p>
+              <p class="r-scene" id="rScene">—</p>
+              <dl class="r-grid">
+                <div data-tip="Share of valid pixels classified flood"><dt>Flooded share</dt><dd id="rCov">—</dd></div>
+                <div data-tip="Pixels classified flood at 0.50"><dt>Flooded px</dt><dd id="rFlood">—</dd></div>
+                <div data-tip="Pixels with valid label + SAR"><dt>Valid px</dt><dd id="rValid">—</dd></div>
+                <div data-tip="Locked operating point"><dt>Threshold</dt><dd>0.50</dd></div>
+              </dl>
+              <div class="bench" id="benchBox" hidden>
+                <p class="r-label">Benchmark <span class="tag">ground-truth evaluation</span></p>
+                <dl class="bench-grid">
+                  <div><dt>IoU</dt><dd id="bIou">—</dd></div>
+                  <div><dt>F1</dt><dd id="bF1">—</dd></div>
+                  <div><dt>Prec</dt><dd id="bP">—</dd></div>
+                  <div><dt>Rec</dt><dd id="bR">—</dd></div>
+                </dl>
+              </div>
+              <div class="export-row">
+                <a class="btn ghost sm" id="dlTif" href="#" download data-tip="GeoTIFF, EPSG:4326">Export GeoTIFF</a>
+                <button class="btn ghost sm" id="dlPng" type="button" data-tip="Download current view">Save view</button>
+              </div>
+            </div>
+            <div class="result-error" id="resultError" hidden>
+              <p class="err-title" id="errTitle">Analysis couldn't be completed.</p>
+              <p class="muted" id="errMsg"></p>
+              <button class="btn ghost sm" id="retryBtn" type="button">Try again</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ METHOD ══ -->
+  <section id="method" class="method" aria-labelledby="methodH">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Methodology</p>
+        <h2 id="methodH">From backscatter to km²</h2>
+        <p class="gap">Existing flood-mapping approaches often rely on satellite imagery alone, or fuse
+          multiple data sources without sufficiently integrating spatial flood detection with
+          environmental context and practical flood-area estimation.</p>
+        <p class="equation" aria-label="T-SAO approach">Sentinel-1 <span>+</span> terrain <span>+</span> deep learning <span>+</span> area estimation</p>
+      </div>
+      <ol class="pipe reveal" id="pipeList" aria-label="T-SAO inference pipeline">
+        <li tabindex="0" data-desc="VV + VH backscatter, 512 × 512, EPSG:4326. The canonical grid — never reprojected."><span class="pn">01 · S1</span><h3>Sentinel-1</h3></li>
+        <li tabindex="0" data-desc="Copernicus GLO-30 elevation, bilinear-mosaicked onto the SAR grid. Floods follow terrain."><span class="pn">02 · DEM</span><h3>Terrain</h3></li>
+        <li tabindex="0" data-desc="Train-derived standardization. VV/VH/DEM only, valid pixels only. No leakage, ever."><span class="pn">03 · NORM</span><h3>Preprocess</h3></li>
+        <li tabindex="0" data-desc="U-Net-32, 7.76M params. Sigmoid output at locked threshold 0.50, valid pixels only."><span class="pn">04 · U-NET</span><h3>Segment</h3></li>
+        <li tabindex="0" data-desc="Binary flood mask + per-pixel WGS84 areas, latitude-corrected. The number response teams need."><span class="pn">05 · KM²</span><h3>Extent</h3></li>
+      </ol>
+      <p class="pipe-desc" id="pipeDesc" aria-live="polite">Hover a stage — VV + VH backscatter, 512 × 512, EPSG:4326. The canonical grid — never reprojected.</p>
+    </div>
+  </section>
+
+  <!-- ══ EVIDENCE ══ -->
+  <section class="evidence" aria-labelledby="perfH">
+    <div class="wrap evi-grid">
+      <div class="reveal">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Evidence, not marketing</p>
+        <h2 id="perfH">Locked performance</h2>
+        <p class="sec-sub">Single-seed M1, shared protocol. Bolivia is a 15-chip geographic holdout —
+          suggestive, never overclaimed.</p>
+        <div class="perf-nums">
+          <div><span class="pn" data-count="0.6699">0.6699</span><span class="pl">Test IoU</span></div>
+          <div><span class="pn" data-count="0.8023">0.8023</span><span class="pl">Test F1</span></div>
+          <div><span class="pn lime" data-count="0.6311">0.6311</span><span class="pl">Bolivia IoU</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="r-label">Controlled ablations · shared protocol · test IoU</p>
+        <ul class="bars" id="ablBars">
+          <li><span class="bl">S1 only</span><span class="btrack"><span class="bfill" data-w="98.2"></span></span><span class="bv">0.6684</span></li>
+          <li class="hl"><span class="bl">S1 + DEM · M1 final</span><span class="btrack"><span class="bfill" data-w="100"></span></span><span class="bv">0.6699</span></li>
+          <li><span class="bl">S1 + rain</span><span class="btrack"><span class="bfill dim" data-w="95.4"></span></span><span class="bv">0.6390</span></li>
+          <li><span class="bl">S1 + DEM + rain</span><span class="btrack"><span class="bfill dim" data-w="99.1"></span></span><span class="bv">0.6639</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span class="foot-brand">T-SAO · FLOOD INTELLIGENCE · M1 LOCKED · THR 0.50</span>
+    <span class="muted">SEN1FLOODS11 · SENTINEL-1 · COPERNICUS DEM · LIVE INFERENCE ONLY</span>
+  </div>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>

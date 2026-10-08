@@ -1,0 +1,9 @@
+split,model,brier_score,ECE,mean_flood_probability,median_flood_probability,mean_nonflood_probability,median_nonflood_probability
+valid,M0,0.0388,0.0288,0.7194,0.9604,0.0251,0.0013
+valid,M1,0.0377,0.0202,0.7536,0.9596,0.0378,0.0019
+valid,M2,0.0408,0.0243,0.7066,0.9536,0.0339,0.0046
+valid,M3,0.0382,0.0238,0.7022,0.9587,0.0266,0.0027
+bolivia,M0,0.0572,0.0499,0.6138,0.8233,0.0182,0.001
+bolivia,M1,0.0498,0.0384,0.6533,0.8524,0.0235,0.0006
+bolivia,M2,0.0605,0.0467,0.5331,0.6303,0.0351,0.013
+bolivia,M3,0.0903,0.0614,0.3831,0.3553,0.0478,0.0038

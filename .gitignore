@@ -1,0 +1,32 @@
+.opencode/
+
+processed/
+predictions/
+
+# Experimental model checkpoints
+models/nb04_s1_unet_best.pt
+models/nb05_multimodal_unet_best.pt
+models/nb06_m2_s1_rain_best.pt
+models/nb09_*.pt
+models/nb10_attention_unet_best.pt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db

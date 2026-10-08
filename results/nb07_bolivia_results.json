@@ -1,0 +1,150 @@
+{
+  "experiment": "NB07_Bolivia_Generalization",
+  "created_utc": "2026-10-08T05:38:17.626335+00:00",
+  "inference_only": true,
+  "threshold": 0.5,
+  "seed": 42,
+  "torch": "2.5.1+cu121",
+  "device": "cuda",
+  "amp": true,
+  "normalization": "processed/normalization_stats.json (split=train, unchanged)",
+  "n_bolivia": 15,
+  "valid_px_total": 2824434,
+  "flood_px_total": 451901,
+  "zero_valid_chips": 0,
+  "models": {
+    "M0": {
+      "checkpoint": "C:\\Users\\Swarnim\\Desktop\\ML projects\\tsao\\models\\nb04_s1_unet_best.pt",
+      "params": 7762753,
+      "input": [
+        "VV_dB",
+        "VH_dB"
+      ],
+      "bolivia": {
+        "iou": 0.6167063752875439,
+        "f1": 0.7629169827236666,
+        "precision": 0.8956601370357418,
+        "recall": 0.6644419906129868,
+        "tp": 300262.0,
+        "fp": 34979.0,
+        "fn": 151639.0,
+        "tn": 2337554.0
+      },
+      "main_test": {
+        "loss": 0.257466051975886,
+        "iou": 0.6683904956275099,
+        "f1": 0.8012398739530441,
+        "precision": 0.8144290731906054,
+        "recall": 0.7884710505891032,
+        "tp": 1983011.0,
+        "fp": 451837.0,
+        "fn": 531997.0,
+        "tn": 17477114.0
+      },
+      "dIoU": -0.051684120339965944,
+      "dF1": -0.03832289122937749
+    },
+    "M1": {
+      "checkpoint": "C:\\Users\\Swarnim\\Desktop\\ML projects\\tsao\\models\\nb06_m1_s1_dem_best.pt",
+      "params": 7763041,
+      "input": [
+        "VV_dB",
+        "VH_dB",
+        "DEM_m"
+      ],
+      "bolivia": {
+        "iou": 0.6311365885004935,
+        "f1": 0.7738611132251559,
+        "precision": 0.8898565897938848,
+        "recall": 0.6846189762802015,
+        "tp": 309380.0,
+        "fp": 38294.0,
+        "fn": 142521.0,
+        "tn": 2334239.0
+      },
+      "main_test": {
+        "loss": 0.2612088196807437,
+        "iou": 0.6698891637498191,
+        "f1": 0.8023157199586112,
+        "precision": 0.8184893811433855,
+        "recall": 0.7867688691248693,
+        "tp": 1978730.0,
+        "fp": 438809.0,
+        "fn": 536278.0,
+        "tn": 17490142.0
+      },
+      "dIoU": -0.03875257524932563,
+      "dF1": -0.028454606733455234
+    },
+    "M2": {
+      "checkpoint": "C:\\Users\\Swarnim\\Desktop\\ML projects\\tsao\\models\\nb06_m2_s1_rain_best.pt",
+      "params": 7763617,
+      "input": [
+        "VV_dB",
+        "VH_dB",
+        "rain_t-3",
+        "rain_t-2",
+        "rain_t-1"
+      ],
+      "bolivia": {
+        "iou": 0.5479310600689223,
+        "f1": 0.7079527943234853,
+        "precision": 0.8887562767870845,
+        "recall": 0.5882770783866365,
+        "tp": 265843.0,
+        "fp": 33275.0,
+        "fn": 186058.0,
+        "tn": 2339258.0
+      },
+      "main_test": {
+        "loss": 0.2938216421339247,
+        "iou": 0.6390269189799244,
+        "f1": 0.779763786880282,
+        "precision": 0.8220861599844491,
+        "recall": 0.7415857126498203,
+        "tp": 1865094.0,
+        "fp": 403639.0,
+        "fn": 649914.0,
+        "tn": 17525312.0
+      },
+      "dIoU": -0.09109585891100203,
+      "dF1": -0.07181099255679668
+    },
+    "M3": {
+      "checkpoint": "C:\\Users\\Swarnim\\Desktop\\ML projects\\tsao\\models\\nb05_multimodal_unet_best.pt",
+      "params": 7763905,
+      "input": [
+        "VV_dB",
+        "VH_dB",
+        "DEM_m",
+        "rain_t-3",
+        "rain_t-2",
+        "rain_t-1"
+      ],
+      "bolivia": {
+        "iou": 0.363633156893299,
+        "f1": 0.5333298838653119,
+        "precision": 0.853678021501601,
+        "recall": 0.3878039659128871,
+        "tp": 175249.0,
+        "fp": 30038.0,
+        "fn": 276652.0,
+        "tn": 2342495.0
+      },
+      "main_test": {
+        "loss": 0.2848068681028154,
+        "iou": 0.6638878913423665,
+        "f1": 0.7979959399731312,
+        "precision": 0.8899056717305774,
+        "recall": 0.7232939219278822,
+        "tp": 1819090.0,
+        "fp": 225048.0,
+        "fn": 695918.0,
+        "tn": 17703903.0
+      },
+      "dIoU": -0.3002547344490675,
+      "dF1": -0.26466605610781935
+    }
+  },
+  "notes": "n=15, single event; suggestive language only; Bolivia never trained on"
+}

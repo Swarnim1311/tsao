@@ -1,0 +1,5 @@
+model,split,iou,f1,precision,recall
+M1 U-Net (locked),test,0.6699,0.8023,0.8185,0.7868
+AttUNet (NB10),test,0.6606,0.7956,0.8295,0.7643
+M1 U-Net (locked),bolivia,0.6311,0.7739,0.8899,0.6846
+AttUNet (NB10),bolivia,0.5004,0.667,0.9196,0.5233

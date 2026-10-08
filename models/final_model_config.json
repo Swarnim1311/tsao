@@ -1,0 +1,22 @@
+{
+  "architecture": "UNet-32",
+  "bolivia_f1": 0.7738611132251559,
+  "bolivia_iou": 0.6311365885004935,
+  "bolivia_precision": 0.8898565897938848,
+  "bolivia_recall": 0.6846189762802015,
+  "checkpoint_path": "models/nb06_m1_s1_dem_best.pt",
+  "input_channel_names": [
+    "VV_dB",
+    "VH_dB",
+    "DEM_m"
+  ],
+  "input_channels": 3,
+  "model_name": "M1",
+  "normalization_stats_path": "processed/normalization_stats.json",
+  "test_f1": 0.8023157199586112,
+  "test_iou": 0.6698891637498191,
+  "test_precision": 0.8184893811433855,
+  "test_recall": 0.7867688691248693,
+  "threshold": 0.5,
+  "training_seed": 42
+}
