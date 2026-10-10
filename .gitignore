@@ -16,8 +16,9 @@ processed/test/*
 predictions/
 website/.cache/
 
-# Local high-res design source (derived website/frontend/bg2.jpg is committed)
+# Local high-res design sources (derived website/frontend/bg3.jpg is committed)
 images/img2.jpg
+images/img3.jpg
 
 # Review screenshots (regenerable, not part of the product)
 website/*.png

@@ -123,6 +123,7 @@
       b.querySelector(".sm").textContent = s.event + " · " + s.event_date;
       b.addEventListener("click", function () { selectScene(s.scene); });
       b.dataset.scene = s.scene;
+      if (!RM) b.style.animationDelay = (i * 80) + "ms";
       list.appendChild(b);
     });
     if (scenes.length) selectScene(scenes[0].scene, true);
@@ -295,6 +296,7 @@
     var id = state.selected;
     $("runBtn").disabled = true;
     $("resultBody").hidden = true; $("resultError").hidden = true; $("resultEmpty").hidden = true;
+    $("nextCompare").hidden = true;
     $("skeleton").hidden = false;
     setStages("preparing");
     setDeck("PROCESSING", "busy");
@@ -352,6 +354,16 @@
     area.classList.remove("reveal-in"); void area.offsetWidth; area.classList.add("reveal-in");
     $("rScene").textContent = res.scene + " · T-SAO M1 · thr 0.50";
     countUp(area, res.flood_area_km2, 2);
+    var pct = res.flood_fraction * 100, label;
+    if (res.flooded_pixels === 0) label = "No flooding detected";
+    else if (pct < 1) label = "Minimal water — trace flooding";
+    else if (pct < 10) label = "Localized flooding";
+    else if (pct < 30) label = "Significant flooding";
+    else label = "Major flooding";
+    $("rVerdict").innerHTML = "<b>" + label + "</b> — " + pct.toFixed(1) + "% of valid scene";
+    var nc = $("nextCompare");
+    nc.hidden = false;
+    nc.onclick = function () { document.querySelector('[data-mode="compare"]').click(); nc.hidden = true; };
     $("rCov").textContent = (res.flood_fraction * 100).toFixed(2) + " %";
     $("rFlood").textContent = fmt(res.flooded_pixels);
     $("rValid").textContent = fmt(res.valid_pixels);

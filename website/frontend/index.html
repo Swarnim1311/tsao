@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>T-SAO — Flood Intelligence Command</title>
-<meta name="description" content="T-SAO: pixel-level flood mapping from Sentinel-1 SAR and terrain intelligence. Live deep-learning inference, geospatial flood extent.">
-<link rel="preload" as="image" href="/bg.jpg">
+<title>T-SAO — Terrain-Sensitive Assessment of Overflow</title>
+<meta name="description" content="T-SAO (Terrain-Sensitive Assessment of Overflow): pixel-level flood mapping from Sentinel-1 SAR and terrain intelligence. Live deep-learning inference, geospatial flood extent.">
+<link rel="preload" as="image" href="/bg3.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
 <!-- ══ FLOATING NAV ══ -->
 <header class="nav" id="topNav">
   <div class="nav-pill">
-    <a class="wordmark" href="#top" aria-label="T-SAO home">
+    <a class="wordmark" href="#top" aria-label="T-SAO home — Terrain-Sensitive Assessment of Overflow" data-tip="Terrain-Sensitive Assessment of Overflow">
       <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0b1220"/><path d="M4 21c5-1.2 7-7 12-7s6 4.5 12 3.4V23H4z" fill="#3ee6c4"/></svg>
       <span class="wm">T-SAO</span>
     </a>
@@ -42,6 +42,7 @@
           <span class="reveal d1">T-SAO</span>
           <span class="thin reveal d2">Flood Intelligence</span>
         </h1>
+        <p class="brand-full reveal d2">Terrain-Sensitive Assessment of Overflow</p>
         <p class="hero-sub reveal d3">Pixel-level flood mapping from Sentinel-1 SAR and terrain.
           Live model inference — every pixel on this page is computed, not illustrated.</p>
         <div class="hero-cta reveal d4">
@@ -150,11 +151,13 @@
           <aside class="data-col" aria-label="Results" aria-live="polite">
             <p class="r-label">Flood extent</p>
             <div class="result-empty" id="resultEmpty">
+              <p class="standby"><span class="standby-reticle" aria-hidden="true"></span>Standby</p>
               <p class="empty-big">Awaiting analysis</p>
-              <p class="muted">Run inference — the extent materializes here with a mask reveal.</p>
+              <p class="muted">Select a scene and run inference — the flood extent and its interpretation land here.</p>
             </div>
             <div class="result-body" id="resultBody" hidden>
               <p class="r-area"><span id="rArea">0.00</span><span class="unit">km²</span></p>
+              <p class="r-verdict" id="rVerdict">—</p>
               <p class="r-scene" id="rScene">—</p>
               <dl class="r-grid">
                 <div data-tip="Share of valid pixels classified flood"><dt>Flooded share</dt><dd id="rCov">—</dd></div>
@@ -175,6 +178,7 @@
                 <a class="btn ghost sm" id="dlTif" href="#" download data-tip="GeoTIFF, EPSG:4326">Export GeoTIFF</a>
                 <button class="btn ghost sm" id="dlPng" type="button" data-tip="Download current view">Save view</button>
               </div>
+              <button class="next-action" id="nextCompare" type="button" hidden>Open source ↔ prediction compare →</button>
             </div>
             <div class="result-error" id="resultError" hidden>
               <p class="err-title" id="errTitle">Analysis couldn't be completed.</p>
@@ -197,6 +201,7 @@
           multiple data sources without sufficiently integrating spatial flood detection with
           environmental context and practical flood-area estimation.</p>
         <p class="equation" aria-label="T-SAO approach">Sentinel-1 <span>+</span> terrain <span>+</span> deep learning <span>+</span> area estimation</p>
+        <p class="method-full">T-SAO · <em>Terrain-Sensitive Assessment of Overflow</em></p>
       </div>
       <ol class="pipe reveal" id="pipeList" aria-label="T-SAO inference pipeline">
         <li tabindex="0" data-desc="VV + VH backscatter, 512 × 512, EPSG:4326. The canonical grid — never reprojected."><span class="pn">01 · S1</span><h3>Sentinel-1</h3></li>
@@ -237,9 +242,21 @@
 </main>
 
 <footer>
-  <div class="wrap foot-in">
-    <span class="foot-brand">T-SAO · FLOOD INTELLIGENCE · M1 LOCKED · THR 0.50</span>
-    <span class="muted">SEN1FLOODS11 · SENTINEL-1 · COPERNICUS DEM · LIVE INFERENCE ONLY</span>
+  <div class="wrap foot-grid">
+    <div class="foot-brand-block">
+      <span class="foot-brand">T-SAO</span>
+      <span class="foot-full">Terrain-Sensitive Assessment of Overflow</span>
+      <span class="muted foot-note">Pixel-level flood mapping from SAR + terrain intelligence.</span>
+    </div>
+    <dl class="foot-meta">
+      <div><dt>Model</dt><dd>M1 · U-Net-32 · thr 0.50</dd></div>
+      <div><dt>Data</dt><dd>Sen1Floods11 · S-1 · Copernicus DEM</dd></div>
+      <div><dt>Mode</dt><dd>Live inference only</dd></div>
+    </dl>
+  </div>
+  <div class="wrap foot-base">
+    <span>T-SAO · M1 LOCKED · LIVE INFERENCE</span>
+    <span>TEST IoU 0.6699 · BOLIVIA IoU 0.6311</span>
   </div>
 </footer>
 
