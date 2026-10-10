@@ -1,6 +1,10 @@
 # TSAO - Next Steps
 
-**Last updated:** 2026-10-08 14:15 UTC
+**Last updated:** 2026-10-10
+
+
+## Update (2026-10-10)
+- PORTABILITY VERIFICATION COMPLETE + validated (model load, CPU smoke Mekong/Ghana, website E2E, requirements.txt, verify script, README run section, gitignore exceptions). Next: USER reviews diff, runs `git add` on new runtime files (requirements.txt, scripts/verify_setup.py, processed/normalization_stats.json, 4 demo npz), commits + pushes; optional: teammate clean-clone trial on a GPU-less laptop.
 
 
 ## Update (2026-10-08 14:15 UTC)

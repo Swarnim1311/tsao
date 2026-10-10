@@ -141,3 +141,15 @@
 - Rewrote README.md into 19-section research README with locked values only, honest limitations, no invented citations/claims.
 - NB01–NB11 present, no backups/checkpoints; results figures present; absolute local paths exist only inside historical results JSON metadata (not code).
 - D24 recorded. NOT committed — awaiting manual git commit/push by user.
+
+## 2026-10-10 — PORTABILITY_AND_CROSS_MACHINE_VERIFICATION COMPLETE
+- Verified production M1 without retraining: models/nb06_m1_s1_dem_best.pt loads via FloodPredictor (param assert 7763041 PASS, thr 0.5, 3ch VV/VH/DEM, train-split stats); config models/final_model_config.json consistent.
+- Runtime-file audit: inference needs checkpoint + processed/normalization_stats.json + input chip; website needs processed/test/{Mekong_1443339,Ghana_1078550,Spain_7387658,India_44475}.npz; website/.cache + predictions/ regenerate at runtime (stay gitignored).
+- .gitignore: replaced blanket processed/ with exceptions committing only normalization_stats.json + the 4 demo test chips (~17MB); other 442 chips, metadata.csv, summaries stay local-only. Verified via git check-ignore.
+- Paths: src/inference + website/backend already repo-relative (PROJECT_ROOT/__file__); frontend uses same-origin /api only. Hardcoded C:/FloodProject + C:/Users/Swarnim paths exist only in frozen notebooks/results metadata (not runtime). website/backend/app.py layers import made CWD-independent (try/except fallback); no API routes/behavior changed.
+- requirements.txt created (numpy/torch/rasterio/affine/matplotlib/pillow/fastapi/uvicorn, floor-pinned; verified set: py3.11.9, torch 2.5.1+cu121, numpy 2.4.1, rasterio 1.4.4, fastapi 0.136.3, uvicorn 0.49.0); CPU default, CUDA auto, install notes in README.
+- scripts/verify_setup.py created: python/torch/device, checkpoint+config+stats, CPU FloodPredictor load, real inference Mekong 18.2236 + Ghana 0.0097, demo-scene presence. ALL PASS.
+- CLI smoke: Mekong 18.2236 km2 (187661 px, IoU 0.9102 via API) + Ghana 0.0097 km2 (99 px) — exact locked reproduction on CPU.
+- Website E2E (uvicorn :8000/:8001): /api/health ok/M1, /api/scenes 4 real chip metadata, frontend 200, POST /api/predict SSE Mekong 18.2236 + Ghana 0.0097 with real benchmark block, mask layer 200, GeoTIFF export OK, unknown scene 404. No mocks.
+- README gained Run T-SAO Locally (clone/venv/install/verify/smoke/backend/browser/stop with exact commands + torch CPU/CUDA guidance + data note).
+- GPU inference NOT separately verified on a GPU-less machine (this laptop has CUDA; CPU path forced and verified). NOT committed — awaiting manual git add/commit/push by user (new files to add: requirements.txt, scripts/verify_setup.py, processed/normalization_stats.json, 4 demo npz).

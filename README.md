@@ -7,6 +7,80 @@ Final locked model **M1**: U-Net-32, inputs VV/VH/DEM, threshold 0.50.
 - Bolivia geographic holdout IoU **0.6311** · F1 **0.7739**
 - Canonical grid 512×512, EPSG:4326 · train-only normalization · latitude-corrected km²
 
+## Run T-SAO Locally
+
+These steps were verified on Windows with Python 3.11 and CPU inference
+(no NVIDIA GPU required; a compatible GPU is used automatically if present).
+
+1. Clone the repository and enter it:
+
+```powershell
+git clone https://github.com/Swarnim1311/tsao.git
+cd tsao
+```
+
+2. Create and activate a virtual environment (Python 3.10+; 3.11 verified):
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+3. Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+PyTorch note: the default PyPI `torch` wheel runs CPU inference on any
+laptop. For a smaller CPU-only install use
+`pip install torch --index-url https://download.pytorch.org/whl/cpu`
+*before* `pip install -r requirements.txt`; for NVIDIA GPU support install
+the matching CUDA wheel from https://pytorch.org/get-started/locally/
+and the pipeline picks CUDA automatically.
+
+4. Verify Python and PyTorch:
+
+```powershell
+python --version
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+```
+
+5. Check that the production checkpoint and configuration exist:
+
+```powershell
+dir models\nb06_m1_s1_dem_best.pt models\final_model_config.json processed\normalization_stats.json
+dir processed\test\Mekong_1443339.npz processed\test\Ghana_1078550.npz
+```
+
+6. Run a real inference smoke test (M1, CPU) — expect 18.2236 km²:
+
+```powershell
+python scripts/verify_setup.py
+python -m src.inference --npz processed/test/Mekong_1443339.npz --output predictions/demo --prefix demo --save-viz
+```
+
+7. Start the FastAPI backend (keep this terminal open):
+
+```powershell
+cd website/backend
+python -m uvicorn app:app --host 127.0.0.1 --port 8000
+```
+
+8. Open the website in a browser: <http://127.0.0.1:8000/> — pick a scene
+(Mekong_1443339, Ghana_1078550, Spain_7387658, India_44475) and run analysis.
+Key routes: `/api/health`, `/api/model-info`, `/api/scenes`,
+`POST /api/predict/{scene}` (SSE), `/api/scenes/{scene}/layer/{vv,vh,dem,prob,mask,gt}`,
+`/api/scenes/{scene}/export`.
+
+9. Stop the server: press `Ctrl+C` in the backend terminal, then
+`deactivate` to leave the virtual environment.
+
+Data note: `processed/normalization_stats.json` plus the 4 demo scene chips
+are committed so a clean clone runs end-to-end. The remaining ~442
+processed chips are local-only (see `NB02`/`NB03`); `predictions/` and
+`website/.cache/` regenerate automatically and are gitignored.
+
 ## 1. What T-SAO does
 
 T-SAO maps floods at the pixel level from multimodal remote sensing:

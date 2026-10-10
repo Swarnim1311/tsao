@@ -13,9 +13,15 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from layers import (
-    gray_layer, dem_layer, prob_layer, mask_layer, gt_layer, to_png_bytes,
-)
+try:
+    # Launch from website/backend (documented startup): companion module on sys.path.
+    from layers import (
+        gray_layer, dem_layer, prob_layer, mask_layer, gt_layer, to_png_bytes,
+    )
+except ImportError:  # Launch from repo root: package-relative import.
+    from website.backend.layers import (
+        gray_layer, dem_layer, prob_layer, mask_layer, gt_layer, to_png_bytes,
+    )
 
 ROOT = Path(__file__).resolve().parents[2]
 import sys

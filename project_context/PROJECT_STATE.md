@@ -1,6 +1,13 @@
 # TSAO Flood-Mapping - Project State
 
-**Last updated:** 2026-10-08 13:00 UTC (T-SAO PREMIUM REFINEMENT complete: yes)
+**Last updated:** 2026-10-10 (PORTABILITY VERIFIED: clean-clone runtime complete, CPU + website E2E pass; commit pending user action)
+
+## Portability status (2026-10-10)
+- Production M1 loads from clean-clone files only (checkpoint + final_model_config.json + committed processed/normalization_stats.json); no retraining, weights untouched.
+- Committed runtime data: processed/normalization_stats.json + processed/test/{Mekong_1443339,Ghana_1078550,Spain_7387658,India_44475}.npz (gitignore exceptions; rest of processed/ ignored).
+- Repro: requirements.txt (py>=3.10, CPU default / CUDA auto) + scripts/verify_setup.py (all pass) + README Run T-SAO Locally.
+- Verified: CPU inference Mekong 18.2236 / Ghana 0.0097 km2; website backend+frontend+SSE+layers+export E2E pass; unknown-scene 404.
+- Limitation: GPU inference path not verified on a GPU-less laptop; full 446-chip processed/ not redistributed (needs raw C:/FloodProject data + NB02/NB03).
 
 ## Objective
 Deep-learning flood mapping from multimodal remote sensing: Sentinel-1 SAR (VV/VH) + Copernicus DEM elevation + NASA IMERG antecedent rainfall → binary flood mask. Sentinel-1 chip is the canonical target grid (512×512, EPSG:4326).

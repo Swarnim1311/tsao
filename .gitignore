@@ -1,7 +1,18 @@
 .opencode/
 .kilo/
 
-processed/
+processed/*
+# Runtime exception: train-derived normalization stats required by inference
+# (src/inference defaults to processed/normalization_stats.json). Small JSON, keep tracked.
+!processed/normalization_stats.json
+# Runtime exception: 4 demo scene chips required by the website + smoke test
+# (website/backend/app.py SCENES). The remaining ~442 processed chips stay local-only.
+!processed/test/
+processed/test/*
+!processed/test/Mekong_1443339.npz
+!processed/test/Ghana_1078550.npz
+!processed/test/Spain_7387658.npz
+!processed/test/India_44475.npz
 predictions/
 website/.cache/
 
